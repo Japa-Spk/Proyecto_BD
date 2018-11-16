@@ -10,8 +10,8 @@ package Modelo;
 public class Producto {
 	private int codigo;
 	private String nombre;
-	private int valorUnitario;
-	
+	private double valorUnitario;
+	private int stock;
 	
 	
 	
@@ -19,7 +19,7 @@ public class Producto {
 		codigo=0;
 		nombre="Producto";
 		valorUnitario=0;
-		
+		stock=0;
 		
 	}
 	
@@ -37,10 +37,11 @@ public class Producto {
 	 * @param nombre
 	 * @param valorUnitario
 	 */
-	public Producto(int codigo, String nombre, int valorUnitario) {
+	public Producto(int codigo, String nombre, double valorUnitario, int stock) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.valorUnitario = valorUnitario;
+		this.stock=stock;
 	}
 
 
@@ -51,29 +52,14 @@ public class Producto {
 			sb.append("Codigo de producto: ").append(codigo).append(", ");
 			sb.append("Nombre de producto: ").append(nombre).append(", "); 
 			sb.append("Valor Unitario: ").append(valorUnitario).append(", ");
+			sb.append("Stock: ").append(stock).append(", ");
 			
 			return sb.toString();	
 	
 	}
 
 	
-	
-	
-	
-	
-	
 
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * @return el codigo
@@ -142,12 +128,9 @@ public class Producto {
 	/**
 	 * @return el valorUnitario
 	 */
-	public int getValorUnitario() {
+	public double getValorUnitario() {
 		return valorUnitario;
 	}
-
-
-
 
 
 
@@ -158,28 +141,37 @@ public class Producto {
 	/**
 	 * @param valorUnitario el valorUnitario a establecer
 	 */
-	public void setValorUnitario(int valorUnitario) {
+	public void setValorUnitario(double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+	/**
+	 * @return el stock
+	 */
+	public int getStock() {
+		return stock;
+	}
+
+
+
+
+
+
+	/**
+	 * @param stock el stock a establecer
+	 */
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+
+
+
 
 }
