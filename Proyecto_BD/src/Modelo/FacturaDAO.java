@@ -31,7 +31,7 @@ public class FacturaDAO{
 	}
 	/**
 	 * Aui estan los dos metodos de prueba, toca organizarlos para que muestre en la vista de factura
-		Se maneja parecido a la de agregar productos.
+		Se maneja parecido a la de agregar productos .
 	*/
 	public void Factura(String b) throws SQLException{
 		String a=b;
