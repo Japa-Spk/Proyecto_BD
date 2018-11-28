@@ -16,6 +16,7 @@ public class AgregarProducto extends javax.swing.JFrame {
 	private ControladorFactura FacturaC;
    public AgregarProducto() {
        initComponents();
+       setSize(600,200);
        FacturaC=new ControladorFactura();
        
        /** AQUI ES DONDE SE LLENA LA LISTA DE PRODUCTOS PERO DONDE ESTA EL GET ESTA UN 1 ES EL
@@ -151,19 +152,22 @@ public class AgregarProducto extends javax.swing.JFrame {
 
    private void jButton1_OKActionPerformed(java.awt.event.ActionEvent evt) {                                            
        // TODO add your handling code here:
-	   try {
-			FacturaC.listarproductos();
-		} catch (SQLException e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-		}
+	  this.jLabel3_CANTIDAD.setText("Stock .l.");
 	   
    }                                           
 
    private void jComboBox1_PRODUCTOSActionPerformed(java.awt.event.ActionEvent evt) {                                                     
        // TODO add your handling code here:
-	   
-	   
+	   try {
+		   int y=this.jComboBox1_PRODUCTOS.getSelectedIndex();
+		   for(int i=0;i<=y;i++) {
+			this.jLabel3_CANTIDAD.setText("CANTIDAD DISPONIBLE:"+ FacturaC.listarproductos().get(i).getStock());
+		   }
+		   } catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+
    }                                                    
 
    /**
