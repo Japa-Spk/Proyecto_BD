@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
 /**
- *l
+ *
  * @author IKAROS
  */
 public class VentanaFactura extends javax.swing.JFrame {
@@ -54,9 +50,9 @@ public class VentanaFactura extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        butAgregar = new javax.swing.JButton();
         butQuitar = new javax.swing.JButton();
+        butAgregar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Factura");
@@ -205,8 +201,12 @@ public class VentanaFactura extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Dcto");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel8.setText("Total");
+        butQuitar.setText("Quitar");
+        butQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butQuitarActionPerformed(evt);
+            }
+        });
 
         butAgregar.setText("Agregar");
         butAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,12 +215,8 @@ public class VentanaFactura extends javax.swing.JFrame {
             }
         });
 
-        butQuitar.setText("Quitar");
-        butQuitar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butQuitarActionPerformed(evt);
-            }
-        });
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel8.setText("Total");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -291,9 +287,7 @@ public class VentanaFactura extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Total, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(91, 91, 91)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(butAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -477,314 +471,5 @@ public class VentanaFactura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton primero;
-    // End of variables declaration     
-	/**
-	 * @return the actualizar
-	 */
-	public javax.swing.JButton getActualizar() {
-		return Actualizar;
-	}
-
-	/**
-	 * @param actualizar the actualizar to set
-	 */
-	public void setActualizar(javax.swing.JButton actualizar) {
-		Actualizar = actualizar;
-	}
-
-	/**
-	 * @return the buscar
-	 */
-	public javax.swing.JButton getBuscar() {
-		return Buscar;
-	}
-
-	/**
-	 * @param buscar the buscar to set
-	 */
-	public void setBuscar(javax.swing.JButton buscar) {
-		Buscar = buscar;
-	}
-
-	/**
-	 * @return the consultas
-	 */
-	public javax.swing.JButton getConsultas() {
-		return Consultas;
-	}
-
-	/**
-	 * @param consultas the consultas to set
-	 */
-	public void setConsultas(javax.swing.JButton consultas) {
-		Consultas = consultas;
-	}
-
-	/**
-	 * @return the descuento
-	 */
-	public javax.swing.JTextField getDescuento() {
-		return Descuento;
-	}
-
-	/**
-	 * @param descuento the descuento to set
-	 */
-	public void setDescuento(javax.swing.JTextField descuento) {
-		Descuento = descuento;
-	}
-
-	/**
-	 * @return the eliminar
-	 */
-	public javax.swing.JButton getEliminar() {
-		return Eliminar;
-	}
-
-	/**
-	 * @param eliminar the eliminar to set
-	 */
-	public void setEliminar(javax.swing.JButton eliminar) {
-		Eliminar = eliminar;
-	}
-
-	/**
-	 * @return the factura_titulo
-	 */
-	public javax.swing.JLabel getFactura_titulo() {
-		return Factura_titulo;
-	}
-
-	/**
-	 * @param factura_titulo the factura_titulo to set
-	 */
-	public void setFactura_titulo(javax.swing.JLabel factura_titulo) {
-		Factura_titulo = factura_titulo;
-	}
-
-	/**
-	 * @return the fecha
-	 */
-	public javax.swing.JTextField getFecha() {
-		return Fecha;
-	}
-
-	/**
-	 * @param fecha the fecha to set
-	 */
-	public void setFecha(javax.swing.JTextField fecha) {
-		Fecha = fecha;
-	}
-
-	/**
-	 * @return the grabar
-	 */
-	public javax.swing.JButton getGrabar() {
-		return Grabar;
-	}
-
-	/**
-	 * @param grabar the grabar to set
-	 */
-	public void setGrabar(javax.swing.JButton grabar) {
-		Grabar = grabar;
-	}
-
-	/**
-	 * @return the iVA
-	 */
-	public javax.swing.JTextField getIVA() {
-		return IVA;
-	}
-
-	/**
-	 * @param iVA the iVA to set
-	 */
-	public void setIVA(javax.swing.JTextField iVA) {
-		IVA = iVA;
-	}
-
-	/**
-	 * @return the nombre
-	 */
-	public javax.swing.JTextField getNombre() {
-		return Nombre;
-	}
-
-	/**
-	 * @param nombre the nombre to set
-	 */
-	public void setNombre(javax.swing.JTextField nombre) {
-		Nombre = nombre;
-	}
-
-	/**
-	 * @return the numero
-	 */
-	public javax.swing.JTextField getNumero() {
-		return Numero;
-	}
-
-	/**
-	 * @param numero the numero to set
-	 */
-	public void setNumero(javax.swing.JTextField numero) {
-		Numero = numero;
-	}
-
-	/**
-	 * @return the productos
-	 */
-	public javax.swing.JTable getProductos() {
-		return Productos;
-	}
-
-	/**
-	 * @param productos the productos to set
-	 */
-	public void setProductos(javax.swing.JTable productos) {
-		Productos = productos;
-	}
-
-	/**
-	 * @return the siguiente
-	 */
-	public javax.swing.JButton getSiguiente() {
-		return Siguiente;
-	}
-
-	/**
-	 * @param siguiente the siguiente to set
-	 */
-	public void setSiguiente(javax.swing.JButton siguiente) {
-		Siguiente = siguiente;
-	}
-
-	/**
-	 * @return the subTotal
-	 */
-	public javax.swing.JTextField getSubTotal() {
-		return SubTotal;
-	}
-
-	/**
-	 * @param subTotal the subTotal to set
-	 */
-	public void setSubTotal(javax.swing.JTextField subTotal) {
-		SubTotal = subTotal;
-	}
-
-	/**
-	 * @return the total
-	 */
-	public javax.swing.JTextField getTotal() {
-		return Total;
-	}
-
-	/**
-	 * @param total the total to set
-	 */
-	public void setTotal(javax.swing.JTextField total) {
-		Total = total;
-	}
-
-	/**
-	 * @return the ultimo
-	 */
-	public javax.swing.JButton getUltimo() {
-		return Ultimo;
-	}
-
-	/**
-	 * @param ultimo the ultimo to set
-	 */
-	public void setUltimo(javax.swing.JButton ultimo) {
-		Ultimo = ultimo;
-	}
-
-	/**
-	 * @return the valDescuento
-	 */
-	public javax.swing.JTextField getValDescuento() {
-		return ValDescuento;
-	}
-
-	/**
-	 * @param valDescuento the valDescuento to set
-	 */
-	public void setValDescuento(javax.swing.JTextField valDescuento) {
-		ValDescuento = valDescuento;
-	}
-
-	/**
-	 * @return the anterior
-	 */
-	public javax.swing.JButton getAnterior() {
-		return anterior;
-	}
-
-	/**
-	 * @param anterior the anterior to set
-	 */
-	public void setAnterior(javax.swing.JButton anterior) {
-		this.anterior = anterior;
-	}
-
-	/**
-	 * @return the cedula
-	 */
-	public javax.swing.JTextField getCedula() {
-		return cedula;
-	}
-
-	/**
-	 * @param cedula the cedula to set
-	 */
-	public void setCedula(javax.swing.JTextField cedula) {
-		this.cedula = cedula;
-	}
-
-	/**
-	 * @return the primero
-	 */
-	public javax.swing.JButton getPrimero() {
-		return primero;
-	}
-
-	/**
-	 * @param primero the primero to set
-	 */
-	public void setPrimero(javax.swing.JButton primero) {
-		this.primero = primero;
-	}
-
-	/**
-	 * @return the butAgregar
-	 */
-	public javax.swing.JButton getButAgregar() {
-		return butAgregar;
-	}
-
-	/**
-	 * @param butAgregar the butAgregar to set
-	 */
-	public void setButAgregar(javax.swing.JButton butAgregar) {
-		this.butAgregar = butAgregar;
-	}
-
-	/**
-	 * @return the butQuitar
-	 */
-	public javax.swing.JButton getButQuitar() {
-		return butQuitar;
-	}
-
-	/**
-	 * @param butQuitar the butQuitar to set
-	 */
-	public void setButQuitar(javax.swing.JButton butQuitar) {
-		this.butQuitar = butQuitar;
-	}
-    
-    
+    // End of variables declaration                   
 }
