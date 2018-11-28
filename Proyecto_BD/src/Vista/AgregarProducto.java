@@ -22,13 +22,17 @@ public class AgregarProducto extends javax.swing.JFrame {
        ESTOY MIRANDO COMO RECORRERLO Y QUE SE LLENE TODA LA LISTA ENTONCES, AGREGA UN ITEM
        DE EL METODO listarproductos DE EL CONTROLADOR Y TIENE UN CONTRO DE EXCEPCIONES PORQUE
        BIENE DEL TIPO DE CONEXION DE SQL.
+       Esta en esta parte porque para que se llene el combo box, se llena cuando se inicia la
+       ventana.
        
        */
        
        this.jComboBox1_PRODUCTOS.removeAllItems();
 	   try {
-			this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos().get(1).getNombre());
-		} catch (SQLException e) {
+		   for(int i=0;i<FacturaC.listarproductos().size();i++) {
+			this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos().get(i).getNombre());
+		   }
+		   } catch (SQLException e) {
 			// TODO Bloque catch generado automáticamente
 			e.printStackTrace();
 		}
