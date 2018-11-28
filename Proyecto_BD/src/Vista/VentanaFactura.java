@@ -6,7 +6,7 @@
 package Vista;
 
 /**
- *
+ *l
  * @author IKAROS
  */
 public class VentanaFactura extends javax.swing.JFrame {
