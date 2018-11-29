@@ -65,7 +65,7 @@ public class FacturaDAO{
 			System.out.println("..: CONECTADO :..");
 			System.out.println(pruevaCn);
 			Statement stm=pruevaCn.createStatement();
-			ResultSet rst=stm.executeQuery("EXECUTE ListarProductos" + x);
+			ResultSet rst=stm.executeQuery("EXECUTE ListarProductos " + x);
 			while(rst.next()) {
 				System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
 									+"\n Stock: "+rst.getInt(4));
@@ -106,6 +106,74 @@ public class FacturaDAO{
 	
 	
 
+	
+	
+	
+	
+	public int PrimeroUltimo(boolean p) throws SQLException{
+		int c=0;
+		Connection pruevaCn=FacturaDAO.getConnection();
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			ResultSet rst=stm.executeQuery("SELECT TOP 1 codigo\r\n" + 
+					"FROM tb_factura\r\n" + 
+					"ORDER BY codigo ASC");
+			if(p==true) {
+			rst=stm.executeQuery("SELECT TOP 1 codigo\r\n" + 
+					"FROM tb_factura\r\n" + 
+					"ORDER BY codigo ASC");
+			}else {
+				rst=stm.executeQuery("SELECT TOP 1 codigo\r\n" + 
+						"FROM tb_factura\r\n" + 
+						"ORDER BY codigo DESC");
+				
+			}
+			while(rst.next()) {
+				System.out.println("NUMERO LLAMADO: " + rst.getInt(1));
+			c = rst.getInt(1);
+					}
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+		return c;
+	}
+	
+	
+	
+	public String Consultas(String b) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		String c = null;
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			ResultSet rst=stm.executeQuery("EXECUTE Consultas " + b);
+			
+			while(rst.next()) {
+				if(Integer.parseInt(b)==0) {
+					c ="Mes:" + rst.getString(1)+"\nVentas:"+rst.getString(2);	
+				}if(Integer.parseInt(b)==1) {
+					c ="Nombre:" + rst.getString(1)+"\nCodigo Producto:"+rst.getString(2)+"\nTotal:"+rst.getString(3);	
+				}if(Integer.parseInt(b)==2) {
+					c = "Codigo de factura:"+rst.getString(1)+"\nCedula:"+rst.getString(2)+"\nCliente:"+rst.getString(3)+"\nTotal:"+rst.getString(4);
+				}
+				
+				
+					}
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+		return c;
+	}
+	
+	
+	
+	
+	
 
 
 

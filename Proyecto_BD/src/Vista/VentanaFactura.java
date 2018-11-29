@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.ControladorFactura;
@@ -23,7 +24,9 @@ public class VentanaFactura extends javax.swing.JFrame {
     public VentanaFactura() {
         initComponents();
         FacturaC=new ControladorFactura();
-        cargFactura("1");
+        this.Descuento.setText("0");
+        llenarFac("1");
+       
         
     }
 
@@ -386,18 +389,80 @@ public class VentanaFactura extends javax.swing.JFrame {
 
     private void primeroActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
+    	try {
+			String a =Integer.toString(FacturaC.primeroUltimate(true));
+			if(Integer.parseInt(a) == Integer.parseInt(this.Numero.getText())) {
+				JOptionPane.showMessageDialog(null, "Ya esta en el primer registro");
+			}else {
+			llenarFac(a);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
     }                                       
 
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+    	
+    	try {
+			String a =Integer.toString(FacturaC.primeroUltimate(true));
+			if(Integer.parseInt(a) == Integer.parseInt(this.Numero.getText())) {
+				JOptionPane.showMessageDialog(null, "Esta en el primer registro");
+			}else {
+			int s=Integer.parseInt(this.Numero.getText())-1;
+			llenarFac(Integer.toString(s));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
+    	
     }                                        
 
     private void SiguienteActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+    	try {
+			String a =Integer.toString(FacturaC.primeroUltimate(false));
+			if(Integer.parseInt(a) == Integer.parseInt(this.Numero.getText())) {
+				JOptionPane.showMessageDialog(null, "No hay mas registros");
+			}else {
+			int s=Integer.parseInt(this.Numero.getText())+1;
+			llenarFac(Integer.toString(s));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
+    	
+    	
     }                                         
 
     private void UltimoActionPerformed(java.awt.event.ActionEvent evt) {                                       
         // TODO add your handling code here:
+    	try {
+			String a =Integer.toString(FacturaC.primeroUltimate(false));
+			if(Integer.parseInt(a) == Integer.parseInt(this.Numero.getText())) {
+				JOptionPane.showMessageDialog(null, "Ya esta en el ultimo registro");
+			}else {
+			llenarFac(a);
+			}
+		} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
     }                                      
 
     private void ConsultasActionPerformed(java.awt.event.ActionEvent evt) {                                          
@@ -443,24 +508,52 @@ public class VentanaFactura extends javax.swing.JFrame {
     
     
     private void cargTabla(String x) {
-    	
+    	    	
     	try {
     		
-    		for(int i=0;i<FacturaC.listarproductos().size();i++) {
+    		String matriz[][]=new String[FacturaC.listarproductos(x).size()][5];
+    		Double totalo=null;
+    		for(int i=0;i<FacturaC.listarproductos(x).size();i++) {
     			//this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos().get(i).getNombre());
-    		
-    		}
-    		
-    		
+	    		totalo=FacturaC.listarproductos(x).get(i).getValorUnitario()*FacturaC.listarproductos(x).get(i).getStock();
+    			matriz[i][0]=Integer.toString(FacturaC.listarproductos(x).get(i).getCodigo());
+	    		matriz[i][1]=FacturaC.listarproductos(x).get(i).getNombre();	
+	    		matriz[i][2]=Double.toString(FacturaC.listarproductos(x).get(i).getValorUnitario());
+	    		matriz[i][3]=Integer.toString(FacturaC.listarproductos(x).get(i).getStock());
+	    		matriz[i][4]=Double.toString(totalo);	
+	    	}
+            Productos.setModel(new javax.swing.table.DefaultTableModel(
+                    matriz,
+                    new String [] {
+                        "Codigo", "Producto", "Precio Unitario", "Cantidad", "Valor Total"
+                    }
+                ));
+    			
     		
  		} catch (SQLException e) {
  			// TODO Bloque catch generado automáticamente
  			e.printStackTrace();
  		}
+    		
+    }
+    
+    
+    private void llenarFac(String x) {
     	
+    	double dcto=0;
     	
+    	cargFactura(x);
+        cargTabla(x);
+        double oPiva=0.19*Double.parseDouble(this.SubTotal.getText());
+        double iva=Double.parseDouble(this.SubTotal.getText())+oPiva;
+        this.IVA.setText(Double.toString(iva));
+        dcto=(Double.parseDouble(this.Descuento.getText())/100)*iva;
+        double dctoT=iva-dcto;
+        this.ValDescuento.setText(Double.toString(dcto));
+        this.Total.setText(Double.toString(dctoT));
     	
     }
+    
     
     
     

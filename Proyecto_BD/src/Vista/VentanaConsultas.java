@@ -1,5 +1,12 @@
 package Vista;
 
+import java.awt.HeadlessException;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
+import Controlador.ControladorFactura;
+
 /**
  *
  * @author IKAROS
@@ -9,8 +16,10 @@ public class VentanaConsultas extends javax.swing.JFrame {
     /**
      * Creates new form VentanaConsultas
      */
+	private ControladorFactura FacturaC;
     public VentanaConsultas() {
         initComponents();
+        FacturaC=new ControladorFactura();
     }
 
     /**
@@ -89,14 +98,38 @@ public class VentanaConsultas extends javax.swing.JFrame {
 
     private void butMensualesActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
+    	try {
+			JOptionPane.showMessageDialog(null, FacturaC.Consult("0"));
+		} catch (HeadlessException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
+    	
     }                                            
 
     private void butProductoVendidoActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         // TODO add your handling code here:
+    	try {
+			JOptionPane.showMessageDialog(null, FacturaC.Consult("1"));
+		} catch (HeadlessException | SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
     }                                                  
 
     private void butClienteComprasActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
+    	try {
+			JOptionPane.showMessageDialog(null, FacturaC.Consult("2"));
+		} catch (HeadlessException | SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
     }                                                 
 
     /**

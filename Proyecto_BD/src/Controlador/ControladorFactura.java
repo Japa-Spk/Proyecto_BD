@@ -36,4 +36,20 @@ public class ControladorFactura {
 	}
 	
 	
+	
+	public int primeroUltimate (boolean b) throws SQLException{
+		
+		return new FacturaDAO().PrimeroUltimo(b);
+	}
+	
+		public String Consult (String b) throws SQLException{
+		
+		return new FacturaDAO().Consultas(b);
+	}
+	
+	
+	
+	
+	
+	
 }
