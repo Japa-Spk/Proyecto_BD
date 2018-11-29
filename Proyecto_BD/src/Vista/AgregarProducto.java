@@ -56,7 +56,7 @@ public class AgregarProducto extends javax.swing.JFrame {
        jLabel3_CANTIDAD = new javax.swing.JLabel();
        jButton2_CANCELAR = new javax.swing.JButton();
 
-       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
        jComboBox1_PRODUCTOS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
        jComboBox1_PRODUCTOS.addActionListener(new java.awt.event.ActionListener() {

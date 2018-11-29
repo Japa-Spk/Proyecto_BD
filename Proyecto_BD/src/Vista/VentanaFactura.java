@@ -1,6 +1,16 @@
 
 package Vista;
 
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.table.DefaultTableModel;
+
+import Controlador.ControladorFactura;
+import Modelo.Producto;
+
 /**
  *
  * @author IKAROS
@@ -9,8 +19,12 @@ public class VentanaFactura extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
+	private ControladorFactura FacturaC;
     public VentanaFactura() {
         initComponents();
+        FacturaC=new ControladorFactura();
+        cargFactura("1");
+        
     }
 
     /**
@@ -388,6 +402,7 @@ public class VentanaFactura extends javax.swing.JFrame {
 
     private void ConsultasActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+    	new VentanaConsultas().setVisible(true);
     }                                         
 
     private void SubTotalActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -396,12 +411,65 @@ public class VentanaFactura extends javax.swing.JFrame {
 
     private void butAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
+    	new AgregarProducto().setVisible(true);
     }                                          
 
     private void butQuitarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
     }                                         
 
+    
+    
+    
+    //METODOS COMPACTOS
+    
+    private void cargFactura(String x) {
+    	
+    	 try {
+ 			this.Numero.setText(Integer.toString(FacturaC.factura(x).getCodigo()));
+ 			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+ 			String fec= df.format(FacturaC.factura(x).getFecha());
+ 			this.Fecha.setText(fec);
+ 			this.cedula.setText(Long.toString(FacturaC.factura(x).getCedulaC()));
+ 			this.Nombre.setText(FacturaC.factura("1").getNombre());
+ 			this.SubTotal.setText(Double.toString(FacturaC.factura(x).getTotal()));
+ 			
+ 		} catch (SQLException e) {
+ 			// TODO Bloque catch generado automáticamente
+ 			e.printStackTrace();
+ 		}
+    	
+    }
+    
+    
+    private void cargTabla(String x) {
+    	
+    	try {
+    		
+    		for(int i=0;i<FacturaC.listarproductos().size();i++) {
+    			//this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos().get(i).getNombre());
+    		
+    		}
+    		
+    		
+    		
+ 		} catch (SQLException e) {
+ 			// TODO Bloque catch generado automáticamente
+ 			e.printStackTrace();
+ 		}
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
