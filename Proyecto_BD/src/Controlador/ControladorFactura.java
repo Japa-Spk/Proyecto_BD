@@ -6,6 +6,7 @@ package Controlador;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Modelo.Cliente;
 import Modelo.FacturaDAO;
 import Modelo.FacturaV;
 import Modelo.Producto;
@@ -34,6 +35,35 @@ public class ControladorFactura {
 	public ArrayList<Producto> listarproductos() throws SQLException {
 		return new FacturaDAO().Productos();
 	}
+	
+	public Producto ProductoX(String x) throws SQLException {
+		return new FacturaDAO().Producto(x);
+	}
+	
+	
+	public void AProducto(String a, String b, String c, String d) throws SQLException {
+		new FacturaDAO().AgregarQuitarP(a,b,c,d);
+	}
+	
+	public void EliminarF(String a) throws SQLException {
+		new FacturaDAO().EliminarProFac(a);
+		new FacturaDAO().EliminarFac(a);
+		
+	}
+	
+	public void ActualizarF(String a, String b) throws SQLException {
+		new FacturaDAO().ActualizarFac(a,b);
+	}
+	
+	public void GuardarF(String a, String b, String c) throws SQLException {
+		new FacturaDAO().GuardarFac(a,b,c);
+	}
+	
+	
+	public ArrayList<Cliente> Clientes () throws SQLException{
+			
+			return new FacturaDAO().Clientes();
+		}
 	
 	
 	

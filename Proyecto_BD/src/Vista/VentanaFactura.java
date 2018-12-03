@@ -1,6 +1,7 @@
 
 package Vista;
 
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -148,13 +149,35 @@ public class VentanaFactura extends javax.swing.JFrame {
         });
 
         Grabar.setText("Grabar");
+        Grabar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GrabarActionPerformed(evt);
+            }
+        });
 
         Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         Actualizar.setText("Actualizar");
-
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
+        
         Eliminar.setText("Eliminar");
-
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+        
+        
+        
         Consultas.setText("Consultas");
         Consultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,7 +486,88 @@ public class VentanaFactura extends javax.swing.JFrame {
 			// TODO Bloque catch generado automáticamente
 			e.printStackTrace();
 		}
-    }                                      
+    }
+    
+    
+    private void GrabarActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    
+    
+    	try {
+			
+    		if(Integer.parseInt(this.Numero.getText())<FacturaC.primeroUltimate(false) && Integer.parseInt(this.Numero.getText())>FacturaC.primeroUltimate(true) ) {
+    			JOptionPane.showMessageDialog(null, "Numero de factura ya registrada");
+	    			
+    		}else {
+    			JOptionPane.showMessageDialog(null, "Guardado....");
+    			FacturaC.GuardarF(this.Numero.getText(),this.cedula.getText(),"2018-10-11");
+    		
+    		
+    		}
+		} catch (NumberFormatException | SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    
+    	
+		
+    
+    
+    }     
+    
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    	try {
+			if(Integer.parseInt(this.Numero.getText())>FacturaC.primeroUltimate(false) || Integer.parseInt(this.Numero.getText())<FacturaC.primeroUltimate(true) ) {
+				JOptionPane.showMessageDialog(null, "Factura no Encontrada");
+			}else {
+				llenarFac(this.Numero.getText());	
+			}
+		} catch (NumberFormatException | SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
+    }    
+    
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    	try {
+			if(Integer.parseInt(this.Numero.getText())>FacturaC.primeroUltimate(false) || Integer.parseInt(this.Numero.getText())<FacturaC.primeroUltimate(true) ) {
+				JOptionPane.showMessageDialog(null, "Factura no Encontrada");
+			}else {	
+			FacturaC.ActualizarF(this.Numero.getText(),this.cedula.getText());
+			}
+		} catch (NumberFormatException | HeadlessException | SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+	
+    	
+    	
+    }    
+    
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
+    	try {
+			
+    		if(Integer.parseInt(this.Numero.getText())>FacturaC.primeroUltimate(false) || Integer.parseInt(this.Numero.getText())<FacturaC.primeroUltimate(true) ) {
+				JOptionPane.showMessageDialog(null, "Factura no Encontrada");
+			}else {	
+    		FacturaC.EliminarF(this.Numero.getText());
+    		JOptionPane.showMessageDialog(null, "Factura Eliminada");
+			}
+    	
+    	
+    	} catch (SQLException e) {
+			// TODO Bloque catch generado automáticamente
+			e.printStackTrace();
+		}
+    	
+    	
+    }    
+    
 
     private void ConsultasActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
@@ -476,11 +580,12 @@ public class VentanaFactura extends javax.swing.JFrame {
 
     private void butAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    	new AgregarProducto().setVisible(true);
+    	new AgregarProducto(this.Numero.getText()).setVisible(true);
     }                                          
 
     private void butQuitarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+    	new QuitarProducto(this.Numero.getText()).setVisible(true);
     }                                         
 
     
@@ -496,7 +601,7 @@ public class VentanaFactura extends javax.swing.JFrame {
  			String fec= df.format(FacturaC.factura(x).getFecha());
  			this.Fecha.setText(fec);
  			this.cedula.setText(Long.toString(FacturaC.factura(x).getCedulaC()));
- 			this.Nombre.setText(FacturaC.factura("1").getNombre());
+ 			this.Nombre.setText(FacturaC.factura(x).getNombre());
  			this.SubTotal.setText(Double.toString(FacturaC.factura(x).getTotal()));
  			
  		} catch (SQLException e) {

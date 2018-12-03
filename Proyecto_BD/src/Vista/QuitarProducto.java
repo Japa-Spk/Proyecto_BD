@@ -1,23 +1,26 @@
 package Vista;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import Controlador.ControladorFactura;
+import Modelo.Producto;
 
 /**
 *
 * @author JOSE
 */
-public class AgregarProducto extends javax.swing.JFrame {
+public class QuitarProducto extends javax.swing.JFrame {
 
    /**
     * Creates new form AgregarProducto
     */
 	private ControladorFactura FacturaC;
 	private static String xyz=null;
-   public AgregarProducto(String xz) {
+	private ArrayList<Producto> b = new ArrayList<Producto>();
+   public QuitarProducto(String xz) {
        initComponents();
        setSize(600,200);
        FacturaC=new ControladorFactura();
@@ -34,14 +37,18 @@ public class AgregarProducto extends javax.swing.JFrame {
        
        this.jComboBox1_PRODUCTOS.removeAllItems();
 	   try {
-		   for(int i=0;i<FacturaC.listarproductos().size();i++) {
-			this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos().get(i).getNombre());
+		   for(int i=0;i<FacturaC.listarproductos(xyz).size();i++) {
+			this.jComboBox1_PRODUCTOS.addItem(FacturaC.listarproductos(xyz).get(i).getNombre());
+			Producto a=new Producto(FacturaC.listarproductos(xyz).get(i).getCodigo(),
+					FacturaC.listarproductos(xyz).get(i).getNombre(), FacturaC.listarproductos(xyz).get(i).getValorUnitario(),FacturaC.listarproductos(xyz).get(i).getStock());
+			b.add(a);
 		   }
 		   } catch (SQLException e) {
 			// TODO Bloque catch generado automáticamente
 			e.printStackTrace();
 		}
    }
+
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -56,8 +63,6 @@ public class AgregarProducto extends javax.swing.JFrame {
        jLabel1_PRODUCTO = new javax.swing.JLabel();
        jLabel2 = new javax.swing.JLabel();
        jButton1_OK = new javax.swing.JButton();
-       jTextField1_CANTIDAD = new javax.swing.JTextField();
-       jLabel3_CANTIDAD = new javax.swing.JLabel();
        jButton2_CANCELAR = new javax.swing.JButton();
 
        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,7 +76,7 @@ public class AgregarProducto extends javax.swing.JFrame {
 
        jLabel1_PRODUCTO.setText("PRODUCTO");
 
-       jLabel2.setText("AGREGAR PRODUCTOS");
+       jLabel2.setText("ELIMINAR PRODUCTOS");
 
        jButton1_OK.setText("OK");
        jButton1_OK.addActionListener(new java.awt.event.ActionListener() {
@@ -79,14 +84,6 @@ public class AgregarProducto extends javax.swing.JFrame {
                jButton1_OKActionPerformed(evt);
            }
        });
-
-       jTextField1_CANTIDAD.addActionListener(new java.awt.event.ActionListener() {
-           public void actionPerformed(java.awt.event.ActionEvent evt) {
-               jTextField1_CANTIDADActionPerformed(evt);
-           }
-       });
-
-       jLabel3_CANTIDAD.setText("CANTIDAD");
 
        jButton2_CANCELAR.setText("CANCELAR");
        jButton2_CANCELAR.addActionListener(new java.awt.event.ActionListener() {
@@ -99,56 +96,42 @@ public class AgregarProducto extends javax.swing.JFrame {
        getContentPane().setLayout(layout);
        layout.setHorizontalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-               .addGap(18, 18, 18)
-               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+           .addGroup(layout.createSequentialGroup()
+               .addGap(67, 67, 67)
+               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                    .addComponent(jComboBox1_PRODUCTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                    .addComponent(jLabel1_PRODUCTO))
-               .addGap(75, 75, 75)
-               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                   .addComponent(jLabel3_CANTIDAD)
-                   .addGroup(layout.createSequentialGroup()
-                       .addGap(10, 10, 10)
-                       .addComponent(jTextField1_CANTIDAD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                       .addComponent(jButton2_CANCELAR)))
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-               .addComponent(jButton1_OK)
-               .addContainerGap())
+               .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-               .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-               .addComponent(jLabel2)
-               .addGap(178, 178, 178))
+               .addGap(18, 180, Short.MAX_VALUE)
+               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                   .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                       .addComponent(jButton2_CANCELAR)
+                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                       .addComponent(jButton1_OK)
+                       .addContainerGap())
+                   .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                       .addComponent(jLabel2)
+                       .addGap(178, 178, 178))))
        );
        layout.setVerticalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addGroup(layout.createSequentialGroup()
                .addGap(10, 10, 10)
                .addComponent(jLabel2)
-               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                   .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                           .addComponent(jLabel1_PRODUCTO)
-                           .addComponent(jLabel3_CANTIDAD))
-                       .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                           .addComponent(jComboBox1_PRODUCTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                           .addComponent(jTextField1_CANTIDAD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                       .addGap(28, 28, 28))
-                   .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                       .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                           .addComponent(jButton1_OK)
-                           .addComponent(jButton2_CANCELAR))
-                       .addContainerGap())))
+               .addGap(22, 22, 22)
+               .addComponent(jLabel1_PRODUCTO)
+               .addGap(18, 18, 18)
+               .addComponent(jComboBox1_PRODUCTOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                   .addComponent(jButton1_OK)
+                   .addComponent(jButton2_CANCELAR))
+               .addContainerGap())
        );
 
        pack();
    }// </editor-fold>                        
-
-   private void jTextField1_CANTIDADActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-       // TODO add your handling code here:
-   }                                                    
 
    private void jButton2_CANCELARActionPerformed(java.awt.event.ActionEvent evt) {                                                  
        // TODO add your handling code here:
@@ -156,38 +139,22 @@ public class AgregarProducto extends javax.swing.JFrame {
 
    private void jButton1_OKActionPerformed(java.awt.event.ActionEvent evt) {                                            
        // TODO add your handling code here:
-	  int a=this.jComboBox1_PRODUCTOS.getSelectedIndex();
-	  try {
-		if(FacturaC.ProductoX(Integer.toString(a+1)).getStock()<Integer.parseInt(this.jTextField1_CANTIDAD.getText())) {
-			JOptionPane.showMessageDialog(null, "Cantidad No Existente");
-		}else {
-			FacturaC.AProducto("0", xyz, Integer.toString(a+1),this.jTextField1_CANTIDAD.getText());
-			
-			
-		}
-		
-		
-		
-	} catch (NumberFormatException | SQLException e) {
+	   int a=this.jComboBox1_PRODUCTOS.getSelectedIndex();
+	   
+	   try {
+		FacturaC.AProducto("1", xyz, Integer.toString(b.get(a).getCodigo()),"10");
+	} catch (SQLException e) {
 		// TODO Bloque catch generado automáticamente
 		e.printStackTrace();
 	}
-	  
-	  this.dispose(); 
+		System.out.println(a);
+	   this.dispose(); 
+		  
+			
    }                                           
 
    private void jComboBox1_PRODUCTOSActionPerformed(java.awt.event.ActionEvent evt) {                                                     
        // TODO add your handling code here:
-	   try {
-		   int y=this.jComboBox1_PRODUCTOS.getSelectedIndex();
-		   for(int i=0;i<=y;i++) {
-			this.jLabel3_CANTIDAD.setText("CANTIDAD DISPONIBLE:"+ FacturaC.listarproductos().get(i).getStock());
-		   }
-		   } catch (SQLException e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-		}
-
    }                                                    
 
    /**
@@ -220,7 +187,7 @@ public class AgregarProducto extends javax.swing.JFrame {
        /* Create and display the form */
        java.awt.EventQueue.invokeLater(new Runnable() {
            public void run() {
-               new AgregarProducto(xyz).setVisible(true);
+               new QuitarProducto(xyz).setVisible(true);
            }
        });
    }
@@ -231,7 +198,5 @@ public class AgregarProducto extends javax.swing.JFrame {
    private javax.swing.JComboBox<String> jComboBox1_PRODUCTOS;
    private javax.swing.JLabel jLabel1_PRODUCTO;
    private javax.swing.JLabel jLabel2;
-   private javax.swing.JLabel jLabel3_CANTIDAD;
-   private javax.swing.JTextField jTextField1_CANTIDAD;
    // End of variables declaration                   
 }

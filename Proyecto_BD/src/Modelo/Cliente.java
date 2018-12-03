@@ -8,7 +8,7 @@ package Modelo;
  *
  */
 public class Cliente {
-	private int cedula;
+	private long cedula;
 	private String nombre;
 	
 	/**Constructor Normal
@@ -28,7 +28,7 @@ public class Cliente {
 	 * @param cedula
 	 * @param nombre
 	 */
-	public Cliente(int cedula, String nombre) {
+	public Cliente(long cedula, String nombre) {
 		this.cedula = cedula;
 		this.nombre = nombre;
 	}
@@ -59,7 +59,7 @@ public class Cliente {
 	/**
 	 * @return el cedula
 	 */
-	public int getCedula() {
+	public long getCedula() {
 		return cedula;
 	}
 
@@ -69,7 +69,7 @@ public class Cliente {
 	/**
 	 * @param cedula el cedula a establecer
 	 */
-	public void setCedula(int cedula) {
+	public void setCedula(long cedula) {
 		this.cedula = cedula;
 	}
 

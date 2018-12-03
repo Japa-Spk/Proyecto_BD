@@ -44,8 +44,8 @@ public class FacturaDAO{
 			ResultSet rst=stm.executeQuery("EXECUTE ObtenerFactura " + a);
 			
 			while(rst.next()) {
-				System.out.println("Codigo de Factura: " + rst.getInt(1) +"\n Fecha Factura: "+rst.getDate(2)+"\n Cedula Cliente: "+rst.getLong(3)
-									+"\n Nombre Cliente: "+rst.getString(4)+"\n Total Factura: "+rst.getInt(5));
+				//System.out.println("Codigo de Factura: " + rst.getInt(1) +"\n Fecha Factura: "+rst.getDate(2)+"\n Cedula Cliente: "+rst.getLong(3)
+					//				+"\n Nombre Cliente: "+rst.getString(4)+"\n Total Factura: "+rst.getInt(5));
 			c = new FacturaV(rst.getInt(1), rst.getLong(3), rst.getString(4), rst.getDate(2), rst.getInt(5));
 			}
 		}else {
@@ -67,8 +67,8 @@ public class FacturaDAO{
 			Statement stm=pruevaCn.createStatement();
 			ResultSet rst=stm.executeQuery("EXECUTE ListarProductos " + x);
 			while(rst.next()) {
-				System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
-									+"\n Stock: "+rst.getInt(4));
+				//System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
+					//				+"\n Stock: "+rst.getInt(4));
 				Producto a=new Producto(rst.getInt(1), rst.getString(2), rst.getFloat(3), rst.getInt(4));
 				b.add(a);
 			
@@ -91,8 +91,8 @@ public class FacturaDAO{
 			Statement stm=pruevaCn.createStatement();
 			ResultSet rst=stm.executeQuery("SELECT * FROM tb_producto");
 			while(rst.next()) {
-				System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
-									+"\n Stock: "+rst.getInt(4));
+				//System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
+					//				+"\n Stock: "+rst.getInt(4));
 				Producto a=new Producto(rst.getInt(1), rst.getString(2), rst.getFloat(3), rst.getInt(4));
 				b.add(a);
 			
@@ -106,6 +106,38 @@ public class FacturaDAO{
 	
 	
 
+	
+	
+
+	
+	public Producto Producto(String x) throws SQLException{
+		Producto a=null;
+		Connection pruevaCn=FacturaDAO.getConnection();
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			ResultSet rst=stm.executeQuery("SELECT * FROM tb_producto WHERE codigo="+x);
+			while(rst.next()) {
+				//System.out.println("Codigo de Producto: " + rst.getInt(1) +"\n Nombre Producto: "+rst.getString(2)+"\n Valor Producto: "+rst.getFloat(3)
+									//+"\n Stock: "+rst.getInt(4));
+				a=new Producto(rst.getInt(1), rst.getString(2), rst.getFloat(3), rst.getInt(4));
+				
+			
+			}
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+		return a;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -131,7 +163,7 @@ public class FacturaDAO{
 				
 			}
 			while(rst.next()) {
-				System.out.println("NUMERO LLAMADO: " + rst.getInt(1));
+				//System.out.println("NUMERO LLAMADO: " + rst.getInt(1));
 			c = rst.getInt(1);
 					}
 		}else {
@@ -169,6 +201,122 @@ public class FacturaDAO{
 		
 		return c;
 	}
+	
+	
+	
+	public void AgregarQuitarP(String a, String b,String c, String d) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			int rst=stm.executeUpdate("EXECUTE AgregarQuitarP " + a +","+b+","+c+","+d);
+			//System.out.println("ENTROO");
+			
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+	}
+	
+	
+	public void EliminarFac(String a) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			int rst=stm.executeUpdate("EXECUTE EliminarFactura " + a);
+			
+			
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+	}
+	
+	
+	public void EliminarProFac(String a) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			int rst=stm.executeUpdate("EXECUTE BorrarProFactura " + a);
+			
+			
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+	}
+	
+	
+	
+	public void ActualizarFac(String a, String b) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			ResultSet rst=stm.executeQuery("EXECUTE ActualizarFac " + a + "," +b);
+			
+			
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+	}
+	
+	
+	
+	public void GuardarFac(String a, String b,String c) throws SQLException{
+		Connection pruevaCn=FacturaDAO.getConnection();
+		
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			int rst=stm.executeUpdate("EXECUTE GuardarF " + a + "," +b+",'"+c+"'");
+			
+			
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+	}
+	
+	
+	
+	
+	public ArrayList<Cliente> Clientes() throws SQLException{
+		ArrayList<Cliente> b = new ArrayList<Cliente>();
+		Connection pruevaCn=FacturaDAO.getConnection();
+		if(pruevaCn!=null) {
+			System.out.println("..: CONECTADO :..");
+			System.out.println(pruevaCn);
+			Statement stm=pruevaCn.createStatement();
+			ResultSet rst=stm.executeQuery("SELECT * FROM tb_cliente  ");
+			while(rst.next()) {
+
+									
+				Cliente a=new Cliente(rst.getLong(2),rst.getString(1));
+				b.add(a);
+			
+			}
+		}else {
+			System.out.println("Desconectado");
+		}
+		
+		return b;
+	}
+	
+
+	
 	
 	
 	
